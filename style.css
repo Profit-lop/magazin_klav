@@ -1,61 +1,73 @@
-body{
+/* ВИПРАВЛЕНО: Додано html для 100% блокування горизонтального скролу */
+html, body {
     background-color: rgba(94, 94, 94, 0.295);
     font-size: 18px;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-.container{
-    margin: 20 auto;
+.container {
+    margin: 20px auto; /* ВИПРАВЛЕНО: додано px до 20 */
     max-width: 1500px;
     display: flex;
     justify-content: center;
-     overflow-x: hidden;
 }
-.shop-area{
+
+.shop-area {
     display: flex;
     flex-direction: column;
     width: 50%;
     gap: 30px;
-     overflow-x: hidden;
 }
-.b-add{
+
+.b-add {
     background-color: rgb(139, 14, 14);
     padding: 8px 12px;
-    border: 1px solid  rgb(139, 14, 14);
-    color: aliceblue;
-   width: 210px;
-    height: 46px;
-    
-}
-.b.add:hover{
-    background-color: rgb(139, 14, 14);
-}
-.b-remove{
-    background-color: rgb(139, 14, 14);
-    padding: 8px 12px;
-    border: 1px solid  rgb(139, 14, 14);
+    border: 1px solid rgb(139, 14, 14);
     color: aliceblue;
     width: 210px;
     height: 46px;
 }
-.b.remove:hover{
-    background-color: rgb(253, 253, 253);
+
+/* ВИПРАВЛЕНО: було .b.add:hover (крапка замість дефісу) */
+.b-add:hover {
+    background-color: rgb(170, 20, 20);
 }
-input{
+
+.b-remove {
+    background-color: rgb(139, 14, 14);
+    padding: 8px 12px;
+    border: 1px solid rgb(139, 14, 14);
+    color: aliceblue;
+    width: 210px;
+    height: 46px;
+}
+
+/* ВИПРАВЛЕНО: було .b.remove:hover */
+.b-remove:hover {
+    background-color: rgb(253, 253, 253);
+    color: rgb(139, 14, 14);
+}
+
+input {
     padding: 8px;
-    border-color: red ;
+    border-color: red;
     width: 204px;
     height: 30px;
 }
-li{
+
+li {
     list-style-type: none;
 }
-.out-1{
+
+.out-1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
 }
+
 .out-1 li {
     background-color: aliceblue;
     padding: 10px;
@@ -65,92 +77,119 @@ li{
     align-items: center;
     justify-content: space-between;
     border-radius: 15px;
+    box-sizing: border-box; /* Щоб padding не розпирав картку */
 }
-.out-1 li img{
+
+.out-1 li img {
     width: 120px;
 }
-img{
+
+img {
     width: 85px;
 }
-.inp{
-display: flex;
-justify-content: center;
-gap: 14px;
-border-color: red;
+
+.inp {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    border-color: red;
 }
-.button{
- display: flex;
- justify-content: center;
- gap: 15px;
+
+.button {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
-.i-price{
+
+.i-price {
     width: 20px;
 }
-h1{
+
+h1 {
     gap: 6px;
     margin-bottom: 0;
 }
-.cardpng{
+
+.cardpng {
     width: 40px;
     position: absolute;
     top: 5%;
-right: 5%;
+    right: 5%;
+    cursor: pointer;
 }
-.cart-area{
-   display: flex;
+
+/* ВИПРАВЛЕНО: Змінено на position: fixed, щоб ховати за межі екрану без появи скролу */
+.cart-area {
+    display: flex;
     justify-content: space-between;
     flex-direction: column;
     background-color: aliceblue;
     width: 500px;
-    padding: 10px;
-    min-height: 500px;
-    position: absolute;
-    right: -600px;
-    transition: 1s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh; /* Кошик тепер на всю висоту екрану */
+    position: fixed;
+    top: 0;
+    right: -550px; /* Сховано з урахуванням ширини та паддінгів */
+    transition: 0.5s ease; /* 1s занадто повільно, 0.5s комфортніше */
+    z-index: 1000; /* Щоб кошик був поверх усіх елементів */
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
 }
-.closeCart{
+
+.closeCart {
     display: block;
     position: absolute;
     top: 10px;
-    right: 10px
+    right: 10px;
+    cursor: pointer;
 }
-.toCart{
+
+.toCart {
     background-color: rgb(139, 14, 14);
     padding: 8px 12px;
-    border: 1px solid  rgb(139, 14, 14);
+    border: 1px solid rgb(139, 14, 14);
     color: aliceblue;
     width: 110px;
     height: 36px;
     border-radius: 15px;
+    cursor: pointer;
 }
-.out-2{
+
+.out-2 {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 0;
+    overflow-y: auto; /* Якщо товарів багато, кошик буде скролитись всередині */
+    flex-grow: 1;
+    margin-top: 40px;
 }
-.out-2 li{
+
+.out-2 li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    
+    gap: 10px;
 }
 
-
-@media(max-width:470px){
-    .out-1 li{
-        width: 40%;
+/* Адаптивність */
+@media(max-width: 470px) {
+    .out-1 li {
+        width: 48%; /* Трішки збільшено, щоб картки ставали гарніше */
     }
-    .shop-area{
+    .shop-area {
         width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
     }
-    .out-1{
+    .out-1 {
         padding: 0;
     }
-    .cart-area{
-        width: 95%;
-        height: 800px;
+    /* ВИПРАВЛЕНО: кошик на весь екран для мобільних */
+    .cart-area {
+        width: 100%;
+        right: -100%; 
+        height: 100vh;
     }
-
 }
+
